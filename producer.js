@@ -1,7 +1,7 @@
 const kafka = require('kafka-node');
+const { producer } = require('./config/kafka'); // Reuse the imported producer
 
 const client = new kafka.KafkaClient({ kafkaHost: process.env.KAFKA_BROKER });
-const producer = new kafka.Producer(client);
 
 producer.on('ready', () => console.log('Kafka Producer Ready'));
 producer.on('error', (err) => console.error('Kafka Producer Error:', err));

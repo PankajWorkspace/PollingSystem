@@ -1,8 +1,5 @@
-const kafka = require('kafka-node');
 const db = require('./config/db');
-
-const client = new kafka.KafkaClient({ kafkaHost: process.env.KAFKA_BROKER });
-const consumer = new kafka.Consumer(client, [{ topic: 'votes', partition: 0 }]);
+const { consumer } = require('./config/kafka'); // Reuse the imported consumer
 
 consumer.on('message', async (message) => {
     const vote = JSON.parse(message.value);
